@@ -1,0 +1,30 @@
+#Internal package file, do not edit.
+#Thu Jun 29 14:27:30 CST 2017
+2.base=G\:\\android projects\\neihanduanzi\\gifView\\build\\intermediates\\res\\resources-release.ap_
+5.file=G\:\\android projects\\neihanduanzi\\gifView\\build\\intermediates\\res\\resources-release.ap_\\res\\drawable\\b.gif
+5.set=ANDROID_RESOURCE
+3.base=G\:\\android projects\\neihanduanzi\\gifView\\build\\intermediates\\res\\resources-release.ap_
+6.file=G\:\\android projects\\neihanduanzi\\gifView\\build\\intermediates\\res\\resources-release.ap_\\res\\drawable\\m.gif
+2.set=ANDROID_RESOURCE
+4.base=G\:\\android projects\\neihanduanzi\\gifView\\build\\intermediates\\res\\resources-release.ap_
+7.file=G\:\\android projects\\neihanduanzi\\gifView\\build\\intermediates\\res\\resources-release.ap_\\res\\layout\\gif.xml
+7.set=ANDROID_RESOURCE
+count=9
+0.file=G\:\\android projects\\neihanduanzi\\gifView\\build\\intermediates\\res\\resources-release.ap_\\res\\drawable\\icon.png
+5.base=G\:\\android projects\\neihanduanzi\\gifView\\build\\intermediates\\res\\resources-release.ap_
+8.file=G\:\\android projects\\neihanduanzi\\gifView\\build\\intermediates\\res\\resources-release.ap_\\AndroidManifest.xml
+4.set=ANDROID_RESOURCE
+6.base=G\:\\android projects\\neihanduanzi\\gifView\\build\\intermediates\\res\\resources-release.ap_
+1.file=G\:\\android projects\\neihanduanzi\\gifView\\build\\intermediates\\transforms\\dex\\release\\folders\\1000\\1f\\main\\classes.dex
+1.set=DEX
+7.base=G\:\\android projects\\neihanduanzi\\gifView\\build\\intermediates\\res\\resources-release.ap_
+2.file=G\:\\android projects\\neihanduanzi\\gifView\\build\\intermediates\\res\\resources-release.ap_\\res\\drawable\\static_gif.gif
+6.set=ANDROID_RESOURCE
+0.base=G\:\\android projects\\neihanduanzi\\gifView\\build\\intermediates\\res\\resources-release.ap_
+8.base=G\:\\android projects\\neihanduanzi\\gifView\\build\\intermediates\\res\\resources-release.ap_
+3.file=G\:\\android projects\\neihanduanzi\\gifView\\build\\intermediates\\res\\resources-release.ap_\\res\\drawable\\doa.gif
+3.set=ANDROID_RESOURCE
+1.base=G\:\\android projects\\neihanduanzi\\gifView\\build\\intermediates\\transforms\\dex\\release\\folders\\1000\\1f\\main
+4.file=G\:\\android projects\\neihanduanzi\\gifView\\build\\intermediates\\res\\resources-release.ap_\\resources.arsc
+8.set=ANDROID_RESOURCE
+0.set=ANDROID_RESOURCE
