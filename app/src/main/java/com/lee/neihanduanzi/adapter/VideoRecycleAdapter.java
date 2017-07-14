@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.lee.neihanduanzi.R;
+import com.lee.neihanduanzi.bean.DataBean;
 import com.lee.neihanduanzi.bean.VideoBean;
 import com.lee.neihanduanzi.viewholder.VideoViewHolder;
 import com.lee.neihanduanzi.widget.CustomVideoView;
@@ -23,10 +24,10 @@ public class VideoRecycleAdapter extends RecyclerView.Adapter<VideoViewHolder> {
 
     private LayoutInflater inflater;
 
-    private ArrayList<VideoBean.DataBeanX.DataBean> dataBeen;
+    private ArrayList<DataBean> dataBeen;
 
 
-    public void setData(ArrayList<VideoBean.DataBeanX.DataBean> dataBeen) {
+    public void setData(ArrayList<DataBean> dataBeen) {
         this.dataBeen = dataBeen;
     }
 
@@ -47,7 +48,7 @@ public class VideoRecycleAdapter extends RecyclerView.Adapter<VideoViewHolder> {
 
     @Override
     public void onBindViewHolder(VideoViewHolder holder, int position) {
-        holder.bindViewHolder(dataBeen.get(position), true);
+        holder.bindViewHolder(dataBeen.get(position), true,position);
     }
 
     @Override

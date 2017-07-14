@@ -5,7 +5,6 @@ import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.IntDef;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,12 +14,12 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.lee.neihanduanzi.R;
-import com.lee.neihanduanzi.bean.VideoBean;
+import com.lee.neihanduanzi.bean.GroupBean;
 import com.lee.neihanduanzi.utils.NumberUtils;
 import com.lee.neihanduanzi.widget.media.IjkVideoView;
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -57,7 +56,9 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
     RelativeLayout parentPanel;
     private Context mContext;
     private LayoutInflater mInflater;
+    private int position;
 
+    private static ArrayList<CustomVideoView> customVideoViews = new ArrayList<>();
     private AudioManager audioManager;
 
     //更新进度条进度
@@ -67,7 +68,7 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
     private int currentProgress;
 
     private boolean isPlaying = false;
-    private VideoBean.DataBeanX.DataBean dataBean;
+    private GroupBean dataBean;
 
     private boolean isShow = true;
     private IMediaPlayer mediaPlayer;
@@ -75,9 +76,11 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
     //视频是否暂停过
     private boolean isPause = false;
     private STATE current;
-    private int currenrPosition=0;
+    private int currenrPosition = 0;
 
-
+    public void setPosition(int position) {
+        this.position = position;
+    }
 
     public enum STATE {
         IDLE,
@@ -132,6 +135,7 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
 
     public CustomVideoView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        customVideoViews.add(this);
         mContext = context;
         mInflater = LayoutInflater.from(context);
         initView();
@@ -151,16 +155,15 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
 
     }
 
-    public void setDataBean(VideoBean.DataBeanX.DataBean dataBean) {
+    public void setDataBean(GroupBean dataBean) {
         this.dataBean = dataBean;
-        Glide.with(mContext).load(dataBean.getGroup().getLarge_cover().getUrl_list().get(0).getUrl()).into(placeholder);
-        leftTv.setText(dataBean.getGroup().getGo_detail_count() + "次播放");
-        rightTv.setText(NumberUtils.numberToPlayTime((int) dataBean.getGroup().getDuration()));
+        Glide.with(mContext).load(dataBean.getLarge_cover().getUrl_list().get(0).getUrl()).into(placeholder);
+        leftTv.setText(dataBean.getGo_detail_count() + "次播放");
+        rightTv.setText(NumberUtils.numberToPlayTime((int) dataBean.getDuration()));
         progress.setProgress(0);
         progress.setVisibility(GONE);
 
         current = STATE.IDLE;
-
 
 
     }
@@ -172,31 +175,33 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
                 if (current == STATE.PLAYING) {
                     //暂停
                     current = STATE.PAUSE;
-                    currenrPosition=getCurrentDuration();
+                    currenrPosition = getCurrentDuration();
                     pause.setImageResource(R.mipmap.play);
                     videoview.pause();
                     update.removeMessages(UPDATE_DURATION);
 
                 } else {
                     //播放
+
                     if (current == STATE.PAUSE) {
-                        Log.i("info","restart"+currenrPosition);
+                        Log.i("info", "restart" + currenrPosition);
                         pause.setImageResource(R.mipmap.pause);
                         videoview.seekTo(currenrPosition);
                         videoview.start();
                         progress.setVisibility(VISIBLE);
                         update.sendEmptyMessageDelayed(UPDATE_DURATION, 100);
                         current = STATE.PLAYING;
-                    } else if (current == STATE.IDLE||current==STATE.COMPLETED) {
-                        Log.i("info","pre");
+                    } else if (current == STATE.IDLE || current == STATE.COMPLETED) {
+
+                        resetAllVideoView();
+                        Log.i("info", "pre");
                         placeholder.setVisibility(GONE);
                         videoview.setVisibility(VISIBLE);
 
                         pause.setVisibility(GONE);
                         preprogress.setVisibility(VISIBLE);
-
-                        videoview.setRender(IjkVideoView.RENDER_TEXTURE_VIEW);
-                        videoview.setVideoURI(Uri.parse(dataBean.getGroup().get_$720p_video().getUrl_list().get(0).getUrl()));
+                        videoview.setRender(videoview.RENDER_TEXTURE_VIEW);
+                        videoview.setVideoURI(Uri.parse(dataBean.get_$720p_video().getUrl_list().get(0).getUrl()));
                         videoview.setOnErrorListener(this);
                         videoview.setOnCompletionListener(this);
                         videoview.setOnInfoListener(this);
@@ -218,28 +223,26 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
      * 将控件重置为初始化的状态
      */
     public void resetAllView() {
-        if (current==STATE.PLAYING){
-            videoview.stopPlayback();
+        if (current == STATE.PLAYING || current == STATE.PAUSE||current==STATE.COMPLETED) {
             if (mediaPlayer!=null){
-                mediaPlayer.release();
-                mediaPlayer=null;
+                videoview.stopPlayback();
             }
         }
-
+        current=STATE.IDLE;
         update.removeMessages(UPDATE_DURATION);
         videoview.setVisibility(GONE);
         placeholder.setVisibility(VISIBLE);
         pause.setVisibility(VISIBLE);
         preprogress.setVisibility(GONE);
-        leftTv.setText(dataBean.getGroup().getGo_detail_count() + "次播放");
-        rightTv.setText(NumberUtils.numberToPlayTime((int) dataBean.getGroup().getDuration()));
+        leftTv.setText(dataBean.getGo_detail_count() + "次播放");
+        rightTv.setText(NumberUtils.numberToPlayTime((int) dataBean.getDuration()));
         progress.setProgress(0);
         progress.setVisibility(GONE);
         bottom.setVisibility(VISIBLE);
         bottomProgress.setVisibility(GONE);
         pause.setImageResource(R.mipmap.play);
-
     }
+
 
     /**
      * 隐藏播放控件
@@ -253,7 +256,7 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
     @Override
     public void onPrepared(IMediaPlayer iMediaPlayer) {
 
-        Log.i("info","start");
+        Log.i("info", "start");
         mediaPlayer = iMediaPlayer;
         current = STATE.PREPARED;
         preprogress.setVisibility(GONE);
@@ -275,7 +278,6 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
     @Override
     public void onCompletion(IMediaPlayer iMediaPlayer) {
         current = STATE.COMPLETED;
-        mediaPlayer.release();
         resetAllView();
     }
 
@@ -294,8 +296,8 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
 
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
-        if (!hasFocus){
-            Log.i("info","no focus!");
+        if (!hasFocus) {
+            Log.i("info", "no focus!");
             resetAllView();
         }
     }
@@ -303,14 +305,23 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
 
     /**
      * 当View不可见 清除播放状态
+     *
      * @param visibility
      */
     @Override
     protected void onWindowVisibilityChanged(int visibility) {
         super.onWindowVisibilityChanged(visibility);
 
-        if (visibility==GONE){
+        if (visibility == GONE) {
             resetAllView();
+        }
+    }
+
+
+    public static void resetAllVideoView() {
+
+        for (int i = 0; i < customVideoViews.size(); i++) {
+            customVideoViews.get(i).resetAllView();
         }
     }
 }

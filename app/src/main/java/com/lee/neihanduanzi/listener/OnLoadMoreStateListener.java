@@ -1,5 +1,7 @@
 package com.lee.neihanduanzi.listener;
 
+import com.lee.neihanduanzi.activity.DetailActivity;
+
 /**
  * Created by u on 2017/6/24.
  */
@@ -13,4 +15,6 @@ public interface OnLoadMoreStateListener {
     void loadSuccess();
 
     void loadFailed();
+
+
 }

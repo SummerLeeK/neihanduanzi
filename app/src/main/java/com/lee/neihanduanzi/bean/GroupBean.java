@@ -1,5 +1,7 @@
 package com.lee.neihanduanzi.bean;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
@@ -8,48 +10,47 @@ import java.util.List;
 
 public class GroupBean extends BaseBean {
 
-    private String text;
-    private int create_time;
-    private long id;
-    private int favorite_count;
-    private int go_detail_count;
-    private int user_favorite;
-    private int share_type;
-    private double max_screen_width_percent;
-    private int is_can_share;
-    private int category_type;
-    private String share_url;
-    private int label;
-    private String content;
-    private int comment_count;
-    private String id_str;
-    private int media_type;
-    private int share_count;
-    private int type;
-    private int status;
-    private int has_comments;
-    private GroupBean.LargeImageBean large_image;
-    private int user_bury;
-    private String status_desc;
-    private UserBean user;
-    private int is_gif;
-    private int user_digg;
-    private int online_time;
-    private String category_name;
-    private boolean category_visible;
-    private int bury_count;
-    private boolean is_anonymous;
-    private int repin_count;
-    private double min_screen_width_percent;
-    private int digg_count;
-    private GifvideoBean gifvideo;
-    private int has_hot_comments;
-    private int image_status;
-    private int user_repin;
-    private GroupBean.ActivityBean activity;
-    private long group_id;
-    private GroupBean.MiddleImageBean middle_image;
-    private int category_id;
+
+    @SerializedName("360p_video")
+    private _$360pVideoBean _$360p_video;
+    private String mp4_url;
+    @SerializedName("720p_video")
+    private _$720pVideoBean _$720p_video;
+    private double duration;
+    @SerializedName("480p_video")
+    private _$480pVideoBean _$480p_video;
+    private String keywords;
+    private String m3u8_url;
+    private LargeCoverBean large_cover;
+    private String title;
+    private int video_height;
+    private String cover_image_uri;
+    private String publish_time;
+    private int play_count;
+    private MediumCoverBean medium_cover;
+    private int video_width;
+    private String flash_url;
+    private String uri;
+    private int is_public_url;
+    private OriginVideoBean origin_video;
+    private String cover_image_url;
+    private int is_video;
+
+    public _$360pVideoBean get_$360p_video() {
+        return _$360p_video;
+    }
+
+    public void set_$360p_video(_$360pVideoBean _$360p_video) {
+        this._$360p_video = _$360p_video;
+    }
+
+    public String getMp4_url() {
+        return mp4_url;
+    }
+
+    public void setMp4_url(String mp4_url) {
+        this.mp4_url = mp4_url;
+    }
 
     public String getText() {
         return text;
@@ -59,12 +60,52 @@ public class GroupBean extends BaseBean {
         this.text = text;
     }
 
+    public _$720pVideoBean get_$720p_video() {
+        return _$720p_video;
+    }
+
+    public void set_$720p_video(_$720pVideoBean _$720p_video) {
+        this._$720p_video = _$720p_video;
+    }
+
+    public int getDigg_count() {
+        return digg_count;
+    }
+
+    public void setDigg_count(int digg_count) {
+        this.digg_count = digg_count;
+    }
+
+    public double getDuration() {
+        return duration;
+    }
+
+    public void setDuration(double duration) {
+        this.duration = duration;
+    }
+
+    public _$480pVideoBean get_$480p_video() {
+        return _$480p_video;
+    }
+
+    public void set_$480p_video(_$480pVideoBean _$480p_video) {
+        this._$480p_video = _$480p_video;
+    }
+
     public int getCreate_time() {
         return create_time;
     }
 
     public void setCreate_time(int create_time) {
         this.create_time = create_time;
+    }
+
+    public String getKeywords() {
+        return keywords;
+    }
+
+    public void setKeywords(String keywords) {
+        this.keywords = keywords;
     }
 
     public long getId() {
@@ -91,6 +132,22 @@ public class GroupBean extends BaseBean {
         this.go_detail_count = go_detail_count;
     }
 
+    public String getM3u8_url() {
+        return m3u8_url;
+    }
+
+    public void setM3u8_url(String m3u8_url) {
+        this.m3u8_url = m3u8_url;
+    }
+
+    public LargeCoverBean getLarge_cover() {
+        return large_cover;
+    }
+
+    public void setLarge_cover(LargeCoverBean large_cover) {
+        this.large_cover = large_cover;
+    }
+
     public int getUser_favorite() {
         return user_favorite;
     }
@@ -107,12 +164,12 @@ public class GroupBean extends BaseBean {
         this.share_type = share_type;
     }
 
-    public double getMax_screen_width_percent() {
-        return max_screen_width_percent;
+    public String getTitle() {
+        return title;
     }
 
-    public void setMax_screen_width_percent(double max_screen_width_percent) {
-        this.max_screen_width_percent = max_screen_width_percent;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getIs_can_share() {
@@ -155,12 +212,28 @@ public class GroupBean extends BaseBean {
         this.content = content;
     }
 
+    public int getVideo_height() {
+        return video_height;
+    }
+
+    public void setVideo_height(int video_height) {
+        this.video_height = video_height;
+    }
+
     public int getComment_count() {
         return comment_count;
     }
 
     public void setComment_count(int comment_count) {
         this.comment_count = comment_count;
+    }
+
+    public String getCover_image_uri() {
+        return cover_image_uri;
+    }
+
+    public void setCover_image_uri(String cover_image_uri) {
+        this.cover_image_uri = cover_image_uri;
     }
 
     public String getId_str() {
@@ -211,12 +284,12 @@ public class GroupBean extends BaseBean {
         this.has_comments = has_comments;
     }
 
-    public GroupBean.LargeImageBean getLarge_image() {
-        return large_image;
+    public String getPublish_time() {
+        return publish_time;
     }
 
-    public void setLarge_image(GroupBean.LargeImageBean large_image) {
-        this.large_image = large_image;
+    public void setPublish_time(String publish_time) {
+        this.publish_time = publish_time;
     }
 
     public int getUser_bury() {
@@ -235,6 +308,30 @@ public class GroupBean extends BaseBean {
         this.status_desc = status_desc;
     }
 
+    public int getPlay_count() {
+        return play_count;
+    }
+
+    public void setPlay_count(int play_count) {
+        this.play_count = play_count;
+    }
+
+    public int getUser_repin() {
+        return user_repin;
+    }
+
+    public void setUser_repin(int user_repin) {
+        this.user_repin = user_repin;
+    }
+
+    public MediumCoverBean getMedium_cover() {
+        return medium_cover;
+    }
+
+    public void setMedium_cover(MediumCoverBean medium_cover) {
+        this.medium_cover = medium_cover;
+    }
+
     public UserBean getUser() {
         return user;
     }
@@ -243,20 +340,20 @@ public class GroupBean extends BaseBean {
         this.user = user;
     }
 
-    public int getIs_gif() {
-        return is_gif;
-    }
-
-    public void setIs_gif(int is_gif) {
-        this.is_gif = is_gif;
-    }
-
     public int getUser_digg() {
         return user_digg;
     }
 
     public void setUser_digg(int user_digg) {
         this.user_digg = user_digg;
+    }
+
+    public int getVideo_width() {
+        return video_width;
+    }
+
+    public void setVideo_width(int video_width) {
+        this.video_width = video_width;
     }
 
     public int getOnline_time() {
@@ -273,6 +370,14 @@ public class GroupBean extends BaseBean {
 
     public void setCategory_name(String category_name) {
         this.category_name = category_name;
+    }
+
+    public String getFlash_url() {
+        return flash_url;
+    }
+
+    public void setFlash_url(String flash_url) {
+        this.flash_url = flash_url;
     }
 
     public boolean isCategory_visible() {
@@ -307,28 +412,20 @@ public class GroupBean extends BaseBean {
         this.repin_count = repin_count;
     }
 
-    public double getMin_screen_width_percent() {
-        return min_screen_width_percent;
+    public String getUri() {
+        return uri;
     }
 
-    public void setMin_screen_width_percent(double min_screen_width_percent) {
-        this.min_screen_width_percent = min_screen_width_percent;
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 
-    public int getDigg_count() {
-        return digg_count;
+    public int getIs_public_url() {
+        return is_public_url;
     }
 
-    public void setDigg_count(int digg_count) {
-        this.digg_count = digg_count;
-    }
-
-    public GifvideoBean getGifvideo() {
-        return gifvideo;
-    }
-
-    public void setGifvideo(GifvideoBean gifvideo) {
-        this.gifvideo = gifvideo;
+    public void setIs_public_url(int is_public_url) {
+        this.is_public_url = is_public_url;
     }
 
     public int getHas_hot_comments() {
@@ -339,27 +436,27 @@ public class GroupBean extends BaseBean {
         this.has_hot_comments = has_hot_comments;
     }
 
-    public int getImage_status() {
-        return image_status;
+    public OriginVideoBean getOrigin_video() {
+        return origin_video;
     }
 
-    public void setImage_status(int image_status) {
-        this.image_status = image_status;
+    public void setOrigin_video(OriginVideoBean origin_video) {
+        this.origin_video = origin_video;
     }
 
-    public int getUser_repin() {
-        return user_repin;
+    public String getCover_image_url() {
+        return cover_image_url;
     }
 
-    public void setUser_repin(int user_repin) {
-        this.user_repin = user_repin;
+    public void setCover_image_url(String cover_image_url) {
+        this.cover_image_url = cover_image_url;
     }
 
-    public GroupBean.ActivityBean getActivity() {
+    public ActivityBean getActivity() {
         return activity;
     }
 
-    public void setActivity(GroupBean.ActivityBean activity) {
+    public void setActivity(ActivityBean activity) {
         this.activity = activity;
     }
 
@@ -371,12 +468,12 @@ public class GroupBean extends BaseBean {
         this.group_id = group_id;
     }
 
-    public GroupBean.MiddleImageBean getMiddle_image() {
-        return middle_image;
+    public int getIs_video() {
+        return is_video;
     }
 
-    public void setMiddle_image(GroupBean.MiddleImageBean middle_image) {
-        this.middle_image = middle_image;
+    public void setIs_video(int is_video) {
+        this.is_video = is_video;
     }
 
     public int getCategory_id() {
@@ -387,7 +484,311 @@ public class GroupBean extends BaseBean {
         this.category_id = category_id;
     }
 
-    public static class LargeImageBean extends BaseBean{
+    public class _$360pVideoBean extends BaseBean{
+        private int width;
+        private String uri;
+        private int height;
+        private List<UrlListBean> url_list;
+
+        public int getWidth() {
+            return width;
+        }
+
+        public void setWidth(int width) {
+            this.width = width;
+        }
+
+        public String getUri() {
+            return uri;
+        }
+
+        public void setUri(String uri) {
+            this.uri = uri;
+        }
+
+        public int getHeight() {
+            return height;
+        }
+
+        public void setHeight(int height) {
+            this.height = height;
+        }
+
+        public List<UrlListBean> getUrl_list() {
+            return url_list;
+        }
+
+        public void setUrl_list(List<UrlListBean> url_list) {
+            this.url_list = url_list;
+        }
+
+    }
+
+    public  class _$720pVideoBean extends BaseBean{
+        private int width;
+        private String uri;
+        private int height;
+        private List<UrlListBean> url_list;
+
+        public int getWidth() {
+            return width;
+        }
+
+        public void setWidth(int width) {
+            this.width = width;
+        }
+
+        public String getUri() {
+            return uri;
+        }
+
+        public void setUri(String uri) {
+            this.uri = uri;
+        }
+
+        public int getHeight() {
+            return height;
+        }
+
+        public void setHeight(int height) {
+            this.height = height;
+        }
+
+        public List<UrlListBean> getUrl_list() {
+            return url_list;
+        }
+
+        public void setUrl_list(List<UrlListBean> url_list) {
+            this.url_list = url_list;
+        }
+
+    }
+
+    public  class _$480pVideoBean extends BaseBean{
+        private int width;
+        private String uri;
+        private int height;
+        private List<UrlListBean> url_list;
+
+        public int getWidth() {
+            return width;
+        }
+
+        public void setWidth(int width) {
+            this.width = width;
+        }
+
+        public String getUri() {
+            return uri;
+        }
+
+        public void setUri(String uri) {
+            this.uri = uri;
+        }
+
+        public int getHeight() {
+            return height;
+        }
+
+        public void setHeight(int height) {
+            this.height = height;
+        }
+
+        public List<UrlListBean> getUrl_list() {
+            return url_list;
+        }
+
+        public void setUrl_list(List<UrlListBean> url_list) {
+            this.url_list = url_list;
+        }
+
+    }
+
+    public class LargeCoverBean extends BaseBean{
+        private String uri;
+        private List<UrlListBean> url_list;
+
+        public String getUri() {
+            return uri;
+        }
+
+        public void setUri(String uri) {
+            this.uri = uri;
+        }
+
+        public List<UrlListBean> getUrl_list() {
+            return url_list;
+        }
+
+        public void setUrl_list(List<UrlListBean> url_list) {
+            this.url_list = url_list;
+        }
+
+    }
+
+    public class MediumCoverBean extends BaseBean{
+        private String uri;
+        private List<UrlListBean> url_list;
+
+        public String getUri() {
+            return uri;
+        }
+
+        public void setUri(String uri) {
+            this.uri = uri;
+        }
+
+        public List<UrlListBean> getUrl_list() {
+            return url_list;
+        }
+
+        public void setUrl_list(List<UrlListBean> url_list) {
+            this.url_list = url_list;
+        }
+
+    }
+
+    public class OriginVideoBean extends BaseBean{
+
+        private int width;
+        private String uri;
+        private int height;
+        private List<UrlListBean> url_list;
+
+        public int getWidth() {
+            return width;
+        }
+
+        public void setWidth(int width) {
+            this.width = width;
+        }
+
+        public String getUri() {
+            return uri;
+        }
+
+        public void setUri(String uri) {
+            this.uri = uri;
+        }
+
+        public int getHeight() {
+            return height;
+        }
+
+        public void setHeight(int height) {
+            this.height = height;
+        }
+
+        public List<UrlListBean> getUrl_list() {
+            return url_list;
+        }
+
+        public void setUrl_list(List<UrlListBean> url_list) {
+            this.url_list = url_list;
+        }
+
+    }
+
+    public class ActivityBean extends BaseBean {
+    }
+
+
+    private String text;
+    private int create_time;
+    private long id;
+    private int favorite_count;
+    private int go_detail_count;
+    private int user_favorite;
+    private int share_type;
+    private double max_screen_width_percent;
+    private int is_can_share;
+    private int category_type;
+    private String share_url;
+    private int label;
+    private String content;
+    private int comment_count;
+    private String id_str;
+    private int media_type;
+    private int share_count;
+    private int type;
+    private int status;
+    private int has_comments;
+    private GroupBean.LargeImageBean large_image;
+    private int user_bury;
+    private String status_desc;
+    private UserBean user;
+    private int is_gif;
+    private int user_digg;
+    private int online_time;
+    private String category_name;
+    private boolean category_visible;
+    private int bury_count;
+    private boolean is_anonymous;
+    private int repin_count;
+    private double min_screen_width_percent;
+    private int digg_count;
+    private GifvideoBean gifvideo;
+    private int has_hot_comments;
+    private int image_status;
+    private int user_repin;
+    private GroupBean.ActivityBean activity;
+    private long group_id;
+    private GroupBean.MiddleImageBean middle_image;
+    private int category_id;
+
+    public double getMax_screen_width_percent() {
+        return max_screen_width_percent;
+    }
+
+    public void setMax_screen_width_percent(double max_screen_width_percent) {
+        this.max_screen_width_percent = max_screen_width_percent;
+    }
+
+
+    public GroupBean.LargeImageBean getLarge_image() {
+        return large_image;
+    }
+
+    public void setLarge_image(GroupBean.LargeImageBean large_image) {
+        this.large_image = large_image;
+    }
+
+
+    public double getMin_screen_width_percent() {
+        return min_screen_width_percent;
+    }
+
+    public void setMin_screen_width_percent(double min_screen_width_percent) {
+        this.min_screen_width_percent = min_screen_width_percent;
+    }
+
+
+    public GifvideoBean getGifvideo() {
+        return gifvideo;
+    }
+
+    public void setGifvideo(GifvideoBean gifvideo) {
+        this.gifvideo = gifvideo;
+    }
+
+    public int getImage_status() {
+        return image_status;
+    }
+
+    public void setImage_status(int image_status) {
+        this.image_status = image_status;
+    }
+
+
+    public GroupBean.MiddleImageBean getMiddle_image() {
+        return middle_image;
+    }
+
+    public void setMiddle_image(GroupBean.MiddleImageBean middle_image) {
+        this.middle_image = middle_image;
+    }
+
+    public class LargeImageBean extends BaseBean {
         private int width;
         private int r_height;
         private int r_width;
@@ -443,7 +844,7 @@ public class GroupBean extends BaseBean {
             this.url_list = url_list;
         }
 
-        public static class UrlListBean extends BaseBean{
+        public class UrlListBean extends BaseBean {
             private String url;
 
             public String getUrl() {
@@ -456,12 +857,7 @@ public class GroupBean extends BaseBean {
         }
     }
 
-
-
-    public static class ActivityBean extends BaseBean {
-    }
-
-    public static class MiddleImageBean extends BaseBean{
+    public class MiddleImageBean extends BaseBean {
         private int width;
         private int r_height;
         private int r_width;
@@ -517,4 +913,5 @@ public class GroupBean extends BaseBean {
             this.url_list = url_list;
         }
     }
+
 }

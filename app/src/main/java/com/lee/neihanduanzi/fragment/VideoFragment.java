@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.headerfooter.songhang.library.SmartRecyclerAdapter;
 import com.lee.neihanduanzi.R;
@@ -24,6 +25,7 @@ import com.lee.neihanduanzi.listener.OnLoadmoreListener;
 import com.lee.neihanduanzi.listener.TextFragmentView;
 import com.lee.neihanduanzi.presenter.Presenter;
 import com.lee.neihanduanzi.presenter.VideoPresenter;
+import com.lee.neihanduanzi.widget.CustomVideoView;
 import com.lee.neihanduanzi.widget.FooterView;
 
 import java.util.ArrayList;
@@ -48,7 +50,7 @@ public class VideoFragment extends BaseFragment implements SwipeRefreshLayout.On
     private VideoRecycleAdapter adapter;
     private SmartRecyclerAdapter smartRecyclerAdapter;
 
-    private ArrayList<VideoBean.DataBeanX.DataBean> dataBeen;
+    private ArrayList<DataBean> dataBeen;
     private boolean isRefresh;
     private VideoPresenter picPresenter;
 
@@ -90,27 +92,6 @@ public class VideoFragment extends BaseFragment implements SwipeRefreshLayout.On
         recycle.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
         layoutManager = (LinearLayoutManager) recycle.getLayoutManager();
 
-
-        recycle.setOnScrollListener(new RecyclerView.OnScrollListener() {
-
-            int firstVisibleItem, lastVisibleItem;
-
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                firstVisibleItem=layoutManager.findFirstVisibleItemPosition();
-                lastVisibleItem=layoutManager.findLastVisibleItemPosition();
-
-
-
-
-            }
-        });
         picPresenter=new VideoPresenter(this);
         picPresenter.request("video");
     }
@@ -129,6 +110,7 @@ public class VideoFragment extends BaseFragment implements SwipeRefreshLayout.On
     @Override
     public void onRefresh() {
         isRefresh=true;
+        CustomVideoView.resetAllVideoView();
         picPresenter.request("video");
     }
 
@@ -148,7 +130,6 @@ public class VideoFragment extends BaseFragment implements SwipeRefreshLayout.On
         }
         if (isRefresh) {
             swipe.setRefreshing(false);
-            recycle.setVisibility(View.GONE);
             Toast.makeText(context,"网络连接失败！"+reason.toString(),Toast.LENGTH_SHORT).show();
         }
     }
@@ -163,9 +144,10 @@ public class VideoFragment extends BaseFragment implements SwipeRefreshLayout.On
         }
         if (isRefresh){
             swipe.setRefreshing(false);
-            dataBeen= (ArrayList<VideoBean.DataBeanX.DataBean>) videoBean.getData().getData();
+            dataBeen= (ArrayList<DataBean>) videoBean.getData().getData();
+            recycle.smoothScrollToPosition(0);
         }else {
-            for (VideoBean.DataBeanX.DataBean dataBean:videoBean.getData().getData()){
+            for (DataBean dataBean:videoBean.getData().getData()){
                 dataBeen.add(dataBean);
             }
         }
@@ -173,5 +155,13 @@ public class VideoFragment extends BaseFragment implements SwipeRefreshLayout.On
         adapter.notifyDataSetChanged();
         isRefresh=false;
 
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (!isVisibleToUser){
+            CustomVideoView.resetAllVideoView();
+        }
     }
 }

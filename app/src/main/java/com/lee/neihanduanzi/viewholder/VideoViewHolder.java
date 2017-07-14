@@ -1,6 +1,7 @@
 package com.lee.neihanduanzi.viewholder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.WindowManager;
@@ -9,12 +10,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.lee.neihanduanzi.R;
+import com.lee.neihanduanzi.activity.TextDetailActivity;
 import com.lee.neihanduanzi.adapter.CommentAdapter;
 import com.lee.neihanduanzi.bean.DataBean;
-import com.lee.neihanduanzi.bean.VideoBean;
 import com.lee.neihanduanzi.utils.DateUtils;
 import com.lee.neihanduanzi.utils.NumberUtils;
 import com.lee.neihanduanzi.widget.CustomVideoView;
+import com.lee.neihanduanzi.widget.DetailHeaderView;
 import com.lee.neihanduanzi.widget.MyListView;
 
 import butterknife.Bind;
@@ -25,7 +27,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by u on 2017/6/30.
  */
 
-public class VideoViewHolder extends RecyclerView.ViewHolder {
+public class VideoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     @Bind(R.id.user_img)
     CircleImageView userImg;
@@ -58,17 +60,21 @@ public class VideoViewHolder extends RecyclerView.ViewHolder {
     @Bind(R.id.share)
     LinearLayout share;
     private CommentAdapter adapter;
-    private VideoBean.DataBeanX.DataBean dataBean;
+    private DataBean dataBean;
 
     private CustomVideoView videoView;
+
+
 
     public VideoViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this,itemView);
+        itemView.setOnClickListener(this);
     }
 
-    public void bindViewHolder(VideoBean.DataBeanX.DataBean dataBean,boolean isShow){
+    public void bindViewHolder(DataBean dataBean,boolean isShow,int position){
         this.dataBean=dataBean;
+        contrainer.removeAllViews();
         Glide.with(itemView.getContext()).load(dataBean.getGroup().getUser().getAvatar_url()).into(userImg);
         userName.setText(dataBean.getGroup().getUser().getName());
         createTime.setText(DateUtils.stampToDate(dataBean.getGroup().getCreate_time()));
@@ -89,14 +95,18 @@ public class VideoViewHolder extends RecyclerView.ViewHolder {
         lookNum.setText("浏览"+dataBean.getGroup().getGo_detail_count()+"次");
 
         WindowManager wm = (WindowManager) this.itemView.getContext().getSystemService(Context.WINDOW_SERVICE);
-
         final int width = wm.getDefaultDisplay().getWidth();
-        int height = wm.getDefaultDisplay().getHeight();
         int videoHeight= (int) (width*1.0/dataBean.getGroup().getVideo_width()*dataBean.getGroup().getVideo_height());
         videoView.setLayoutParams(new LinearLayout.LayoutParams(width,videoHeight));
-        videoView.setDataBean(dataBean);
-
-        contrainer.removeAllViews();
+        videoView.setDataBean(dataBean.getGroup());
         contrainer.addView(videoView);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent=new Intent(itemView.getContext(), TextDetailActivity.class);
+        intent.putExtra("type", DetailHeaderView.VIDEO_TYPE);
+        intent.putExtra("data",dataBean.getGroup());
+        itemView.getContext().startActivity(intent);
     }
 }

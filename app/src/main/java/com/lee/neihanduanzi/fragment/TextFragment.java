@@ -109,7 +109,6 @@ public class TextFragment extends BaseFragment implements TextFragmentView, Swip
         }
         if (isRefresh) {
             swipe.setRefreshing(false);
-            recycle.setVisibility(View.GONE);
             Toast.makeText(context,"网络连接失败！",Toast.LENGTH_SHORT).show();
         }
     }
@@ -128,6 +127,7 @@ public class TextFragment extends BaseFragment implements TextFragmentView, Swip
         if (isRefresh) {
             swipe.setRefreshing(false);
             dataBeen = textBean.getData().getData();
+            recycle.smoothScrollToPosition(0);
         } else {
             for (int i = 0; i < textBean.getData().getData().size(); i++) {
                 dataBeen.add(textBean.getData().getData().get(i));

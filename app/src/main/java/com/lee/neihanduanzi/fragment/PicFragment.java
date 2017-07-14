@@ -41,7 +41,7 @@ public class PicFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
     RecyclerView recycle;
     @Bind(R.id.swipe)
     SwipeRefreshLayout swipe;
-    private FooterView footerView;
+
     private Context context;
     private LinearLayoutManager layoutManager;
 
@@ -53,7 +53,7 @@ public class PicFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
     private Presenter picPresenter;
 
     private static OnLoadMoreStateListener listener;
-
+    private FooterView footerView;
 
     @Nullable
     @Override
@@ -130,7 +130,6 @@ public class PicFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
         }
         if (isRefresh) {
             swipe.setRefreshing(false);
-            recycle.setVisibility(View.GONE);
             Toast.makeText(context,"网络连接失败！"+reason.toString(),Toast.LENGTH_SHORT).show();
         }
     }
@@ -146,6 +145,7 @@ public class PicFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
         if (isRefresh){
             swipe.setRefreshing(false);
             dataBeen= (ArrayList<DataBean>) picBean.getData().getData();
+            recycle.smoothScrollToPosition(0);
         }else {
             for (DataBean dataBean:picBean.getData().getData()){
                 dataBeen.add(dataBean);

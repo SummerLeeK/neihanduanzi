@@ -20,7 +20,7 @@
         </activity>
 
         <activity android:name=".activity.TextDetailActivity"></activity>
-        <activity android:name=".activity.PicDetailActivity"></activity>
+        <activity android:name=".activity.DetailActivity"></activity>
     </application>
 
 </manifest>

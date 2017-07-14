@@ -142,6 +142,12 @@ public class DetailHeaderView extends RelativeLayout {
 
                 break;
             case VIDEO_TYPE:
+                contrainer.removeAllViews();
+                CustomVideoView videoView=new CustomVideoView(mContext);
+                int videoHeight= (int) (width*1.0/groupbean.getVideo_width()*groupbean.getVideo_height());
+                videoView.setLayoutParams(new LinearLayout.LayoutParams(width,videoHeight));
+                videoView.setDataBean(groupbean);
+                contrainer.addView(videoView);
                 break;
         }
         invalidate();

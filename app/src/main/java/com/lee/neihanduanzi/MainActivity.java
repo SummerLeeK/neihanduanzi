@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
     private void initView() {
         fragments = new ArrayList<>();
         manager=getSupportFragmentManager();
+
         txt_tab = tablayout.newTab().setText("段子");
         pic_tab = tablayout.newTab().setText("图片");
         video_tab = tablayout.newTab().setText("视频");

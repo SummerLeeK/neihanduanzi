@@ -1,6 +1,7 @@
 package com.lee.neihanduanzi.widget;
 
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.lee.neihanduanzi.R;
+import com.lee.neihanduanzi.activity.BaseActivity;
 import com.lee.neihanduanzi.fragment.BaseFragment;
 import com.lee.neihanduanzi.fragment.TextFragment;
 import com.lee.neihanduanzi.listener.OnLoadMoreStateListener;
@@ -53,6 +55,10 @@ public class FooterView extends RelativeLayout implements View.OnClickListener, 
     }
     public void setFragmentListener(BaseFragment fragment){
         fragment.setListener(this);
+    }
+
+    public void setFragmentListener(BaseActivity activity){
+        activity.setListener(this);
     }
     @Override
     public void onClick(View v) {

@@ -5,25 +5,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.lee.neihanduanzi.R;
-import com.lee.neihanduanzi.activity.PicDetailActivity;
 import com.lee.neihanduanzi.activity.TextDetailActivity;
 import com.lee.neihanduanzi.adapter.CommentAdapter;
 import com.lee.neihanduanzi.bean.DataBean;
-import com.lee.neihanduanzi.bean.PicBean;
-import com.lee.neihanduanzi.bean.TextBean;
-import com.lee.neihanduanzi.liao.GifView;
 import com.lee.neihanduanzi.utils.DateUtils;
 import com.lee.neihanduanzi.utils.NumberUtils;
 import com.lee.neihanduanzi.widget.DetailHeaderView;
@@ -34,6 +27,7 @@ import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
+
 
 /**
  * Created by u on 2017/6/29.
@@ -77,23 +71,31 @@ public class PicViewHolder extends RecyclerView.ViewHolder implements View.OnCli
 
 
     private Dialog dialog;
-    private ScrollView scrollView;
     private PhotoView photoView;
+//    private ImageView imageView;
+//    private Button save;
+//    private Button shareBtn;
 
     public PicViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
         dialog=new Dialog(itemView.getContext(),R.style.FullScreen);
         dialog.setContentView(R.layout.dialog_view);
-
+//        imageView= (ImageView) dialog.findViewById(R.id.back);
+//        save= (Button) dialog.findViewById(R.id.save);
+//        shareBtn= (Button) dialog.findViewById(R.id.share);
         photoView= (PhotoView) dialog.findViewById(R.id.photo);
-        photoView.setOnClickListener(new View.OnClickListener() {
+        PhotoViewAttacher photoViewAttacher=new PhotoViewAttacher(photoView);
+        photoViewAttacher.setOnViewTapListener(new PhotoViewAttacher.OnViewTapListener() {
             @Override
-            public void onClick(View v) {
+            public void onViewTap(View view, float x, float y) {
                 dialog.dismiss();
             }
         });
         itemView.setOnClickListener(this);
+//        imageView.setOnClickListener(this);
+//        save.setOnClickListener(this);
+//        shareBtn.setOnClickListener(this);
     }
 
     public void bindViewHolder(final DataBean dataBean, boolean isShow) {
@@ -135,7 +137,7 @@ public class PicViewHolder extends RecyclerView.ViewHolder implements View.OnCli
         });
         linearLayout.addView(image);
 
-        Glide.with(itemView.getContext()).load(dataBean.getGroup().getMiddle_image().getUrl_list().get(0).getUrl()).into(image);
+        Glide.with(itemView.getContext()).load(dataBean.getGroup().getLarge_image().getUrl_list().get(0).getUrl()).into(image);
 
         if (isShow) {
             commentList.setVisibility(View.VISIBLE);
@@ -160,6 +162,16 @@ public class PicViewHolder extends RecyclerView.ViewHolder implements View.OnCli
             itemView.getContext().startActivity(intent);
 
         }
+//        if (v.getId()==imageView.getId()){
+//            dialog.dismiss();
+//        }
+//        if (v.getId()==save.getId()){
+//
+//
+//        }
+//        if (v.getId()==shareBtn.getId()){
+//
+//        }
 
     }
 }
